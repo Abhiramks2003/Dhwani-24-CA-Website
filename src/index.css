@@ -1,0 +1,35 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  background-image: url("/src/assets/dhwani-bg.jpg");
+  background-color: #040c11;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f6f7fd;
+  border-radius: 32px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ec7474;
+  border-radius: 32px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
