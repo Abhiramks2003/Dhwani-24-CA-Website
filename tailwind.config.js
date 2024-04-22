@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         "odibee-sans": ["Odibee Sans", "cursive"],
+        "inter": ["Inter", "sans"]
       },
     },
   },

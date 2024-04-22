@@ -3,8 +3,8 @@
 @import "tailwindcss/utilities";
 
 body {
-  background-image: url("/src/assets/dhwani-bg.jpg");
-  background-color: #040c11;
+  background-image: url("/src/assets/bg.jpg");
+  background-color: #47C6B7;
 }
 
 ::-webkit-scrollbar {
@@ -25,11 +25,24 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ec7474;
+  background: #EE5876;
   border-radius: 32px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.text1{
+  text-shadow: 5px 5px rgb(255, 155, 5);
+}
+
+.text1-mobile{
+  text-shadow: 2px 2px rgb(255, 155, 5);
+}
+
+.txt-stroke{
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px white;
 }
