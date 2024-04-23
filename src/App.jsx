@@ -25,16 +25,16 @@ export default function App() {
     });
   }, []);
 
-  useEffect(() => {
-    if (!leaderboard.length) return;
-    const filteredLeaderboard = leaderboard.filter((lb) => {
-      return (
-        lb.name.toLowerCase().includes(search.toLowerCase()) ||
-        lb.college.toLowerCase().includes(search.toLowerCase())
-      );
-    });
-    setFilteredLeaderboard(filteredLeaderboard);
-  }, [search]);
+  // useEffect(() => {
+  //   if (!leaderboard.length) return;
+  //   const filteredLeaderboard = leaderboard.filter((lb) => {
+  //     return (
+  //       lb.name.toLowerCase().includes(search.toLowerCase()) ||
+  //       lb.college.toLowerCase().includes(search.toLowerCase())
+  //     );
+  //   });
+  //   setFilteredLeaderboard(filteredLeaderboard);
+  // }, [search]);
 
   return (
     <div className="border-[0.7rem] border-[#EE5876]">
