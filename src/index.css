@@ -34,14 +34,16 @@ body {
   background: #555;
 }
 
-.text1{
+.text1 {
   text-shadow: 5px 5px rgb(255, 155, 5);
 }
 
-.text1-mobile{
-  text-shadow: 2px 2px rgb(255, 155, 5);
+@media (max-width: 640px) {
+  .text1 {
+    text-shadow: 2px 2px rgb(255, 155, 5);
+  }
 }
 
-.txt-stroke{
-  text-shadow:3px 3px #EE5876 ;
+.txt-stroke {
+  text-shadow: 3px 3px black;
 }

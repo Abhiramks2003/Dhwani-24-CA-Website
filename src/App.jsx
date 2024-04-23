@@ -37,7 +37,7 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="border-[0.7rem]  border-[#EE5876]">
+    <div className="border-[0.7rem] border-[#EE5876]">
       <div className="font-inter border-[0.7rem] border-[#FDC61E] uppercase h-full flex flex-col justify-center items-center gap-4 md:gap-12">
         {/* <div className="text-white mt-4">
           Drishti Website
@@ -52,10 +52,10 @@ export default function App() {
           <img src={logo} className="h-10" alt="" />
             <img src={title} alt="" className="h-8 md:h-12" />
           </a>
-          <h2 className="text-2xl md:text-7xl mt-3 font-extrabold text-white text1-mobile md:text1">
+          <h2 className="text-2xl md:text-7xl mt-3 font-extrabold text-white text1">
             Campus Ambassador
           </h2>
-          <h2 className="text-xl md:text-6xl font-semibold text-black mt-3 txt-stroke">
+          <h2 className="text-xl md:text-6xl font-semibold text-[#FDC61E] mt-3 txt-stroke">
             Leaderboard
           </h2>
         </div>
