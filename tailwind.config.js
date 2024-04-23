@@ -7,6 +7,7 @@ export default {
         "odibee-sans": ["Odibee Sans", "cursive"],
         "inter": ["Inter", "sans"]
       },
+      
     },
   },
   plugins: [],
