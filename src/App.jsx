@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { client } from "../sanityConfig.js";
 import title from "./assets/title.png";
-import logo from "./assets/dhwani-favicon.png"
+import logo from "./assets/dhwani-favicon.png";
+import axios from "axios";
 async function getLeaderboard() {
-  const leaderboard = await client.fetch('*[_type == "ambassador"]');
-  console.log(leaderboard);
+  // const leaderboard = await client.fetch('*[_type == "ambassador"]');
+  const leaderboard = await axios.get(
+    "http://localhost:8000/campus-ambassadors",
+  );
   return leaderboard;
 }
 
@@ -13,18 +16,18 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [filteredLeaderboard, setFilteredLeaderboard] = useState([]);
   useEffect(() => {
+    // getLeaderboard().then((leaderboard) => {
+    //   leaderboard.forEach((lb) => {
+    //     lb.total_count = lb.ref_count + lb.share_score;
+    //   });
+    // const sortedLeaderboard = leaderboard.sort(
+    //   (a, b) => b.total_count - a.total_count,
+    // );
     getLeaderboard().then((leaderboard) => {
-      leaderboard.forEach((lb) => {
-        lb.total_count = lb.ref_count + lb.share_score;
-      });
-      const sortedLeaderboard = leaderboard.sort(
-        (a, b) => b.total_count - a.total_count
-      );
-      setLeaderboard(sortedLeaderboard);
-      setFilteredLeaderboard(sortedLeaderboard);
+      leaderboard = leaderboard.data.sort((a, b) => b.points - a.points);
+      setLeaderboard(leaderboard);
     });
   }, []);
-
   // useEffect(() => {
   //   if (!leaderboard.length) return;
   //   const filteredLeaderboard = leaderboard.filter((lb) => {
@@ -49,7 +52,7 @@ export default function App() {
             className="text-white border-2 flex items-center shadow-black shadow-md -rotate-3 hover:rotate-0 ease-linear px-4 py-2 self-start bg-[#FDC61E] border-black"
             target="_"
           >
-          <img src={logo} className="h-10" alt="" />
+            <img src={logo} className="h-10" alt="" />
             <img src={title} alt="" className="h-8 md:h-12" />
           </a>
           <h2 className="text-2xl md:text-7xl mt-3 font-extrabold text-white text1">
@@ -77,12 +80,16 @@ export default function App() {
           </thead>
           <div className="w-full h-2 md:h-4"></div>
           <tbody className="bg-[#51A1AA17] rounded-lg  backdrop-blur-lg block h-96 overflow-auto">
-            {filteredLeaderboard.slice(0, 20).map((lb, index) => (
-              <tr className="text-xs md:text-2xl text-white uppercase" key={index + lb.name}>
-                <td className="text-left pl-8 py-4 w-40">{leaderboard.indexOf(lb) + 1}</td>
+            {leaderboard.slice(0, 20).map((lb, index) => (
+              <tr
+                className="text-xs md:text-2xl text-white uppercase"
+                key={index + lb.name}
+              >
+                <td className="text-left pl-8 py-4 w-40">
+                  {leaderboard.indexOf(lb) + 1}
+                </td>
                 <td className="text-center w-64">{lb.name}</td>
                 <td className="text-center w-[800px]">{lb.college}</td>
-              
               </tr>
             ))}
           </tbody>
