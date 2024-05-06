@@ -5,9 +5,19 @@ import logo from "./assets/dhwani-favicon.png";
 import axios from "axios";
 async function getLeaderboard() {
   // const leaderboard = await client.fetch('*[_type == "ambassador"]');
-  const leaderboard = await axios.get(
-    "http://localhost:8000/campus-ambassadors",
+  let leaderboard = await axios.get(
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA1pRG16ytOHqJbDQR_RgM7Qc_5lUn3PQCp4ygknQqgjyZMiF7iO40QK1Wl5t2dvCsouYg6nac_oz-/pub?output=csv",
   );
+  const rows = leaderboard.data.split(/\r?\n/);
+  const headers = rows[0].split(",");
+  leaderboard = rows.slice(1).map((row) => {
+    const rowData = row.split(",");
+    const obj = {};
+    headers.forEach((header, i) => {
+      obj[header] = rowData[i];
+    });
+    return obj;
+  });
   return leaderboard;
 }
 
@@ -24,10 +34,13 @@ export default function App() {
     //   (a, b) => b.total_count - a.total_count,
     // );
     getLeaderboard().then((leaderboard) => {
-      leaderboard = leaderboard.data.sort((a, b) => b.points - a.points);
+      leaderboard = leaderboard.sort((a, b) => b.Points - a.Points);
       setLeaderboard(leaderboard);
     });
   }, []);
+  // useEffect(() => {
+  //   console.log(leaderboard);
+  // }, [leaderboard]);
   // useEffect(() => {
   //   if (!leaderboard.length) return;
   //   const filteredLeaderboard = leaderboard.filter((lb) => {
@@ -80,18 +93,25 @@ export default function App() {
           </thead>
           <div className="w-full h-2 md:h-4"></div>
           <tbody className="bg-[#51A1AA17] rounded-lg  backdrop-blur-lg block h-96 overflow-auto">
-            {leaderboard.slice(0, 20).map((lb, index) => (
-              <tr
-                className="text-xs md:text-2xl text-white uppercase"
-                key={index + lb.name}
-              >
-                <td className="text-left pl-8 py-4 w-40">
-                  {leaderboard.indexOf(lb) + 1}
-                </td>
-                <td className="text-center w-64">{lb.name}</td>
-                <td className="text-center w-[800px]">{lb.college}</td>
-              </tr>
-            ))}
+            {leaderboard.slice(0, 20).map(
+              (lb, index) => (
+                console.log(lb),
+                (
+                  <tr
+                    className="text-xs md:text-2xl text-white uppercase"
+                    key={index + lb.Name}
+                  >
+                    <td className="text-left pl-8 py-4 w-40">
+                      {leaderboard.indexOf(lb) + 1}
+                    </td>
+                    <td className="text-center w-64">{lb.Name}</td>
+                    <td className="text-center w-[800px]">
+                      {lb["College Name"]}
+                    </td>
+                  </tr>
+                )
+              ),
+            )}
           </tbody>
         </table>
       </div>
