@@ -8,6 +8,7 @@ async function getLeaderboard() {
   let leaderboard = await axios.get(
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA1pRG16ytOHqJbDQR_RgM7Qc_5lUn3PQCp4ygknQqgjyZMiF7iO40QK1Wl5t2dvCsouYg6nac_oz-/pub?output=csv",
   );
+  console.log(leaderboard);
   const rows = leaderboard.data.split(/\r?\n/);
   const headers = rows[0].split(",");
   leaderboard = rows.slice(1).map((row) => {
@@ -88,15 +89,16 @@ export default function App() {
               <th className="text-left pb-2 md:pb-3 w-40">Position</th>
               <th className="text-center pb-2 md:pb-3 w-64">Name</th>
               <th className="text-center pb-2 md:pb-3 w-[800px]">College</th>
-              {/* <th className="text-right pb-2 md:pb-4">Score</th> */}
+              <th className="text-right pb-2 md:pb-4">Score</th>
             </tr>
           </thead>
           <div className="w-full h-2 md:h-4"></div>
           <tbody className="bg-[#51A1AA17] rounded-lg  backdrop-blur-lg block h-96 overflow-auto">
             {leaderboard.slice(0, 20).map(
-              (lb, index) => (
-                console.log(lb),
-                (
+              (lb, index) =>
+                lb.Name &&
+                lb["College Name"] &&
+                lb.Points && (
                   <tr
                     className="text-xs md:text-2xl text-white uppercase"
                     key={index + lb.Name}
@@ -108,9 +110,9 @@ export default function App() {
                     <td className="text-center w-[800px]">
                       {lb["College Name"]}
                     </td>
+                    <td className="text-right pr-8">{lb.Points}</td>
                   </tr>
-                )
-              ),
+                ),
             )}
           </tbody>
         </table>
